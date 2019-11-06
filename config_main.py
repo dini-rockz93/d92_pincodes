@@ -107,6 +107,9 @@ d92B_list = [
 
 d92A_store = dict.fromkeys(d92A_list, "District92A")
 d92B_store = dict.fromkeys(d92B_list, "District92B")
+templates = "/Users/Don/Documents/batcave/flask_app_d92/pincode/d92_pincodes/templates"
+
+
 
 host_config = {
     'host': '127.0.0.1',

@@ -2,9 +2,12 @@ from flask import Flask, request, render_template, make_response
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from config_main import host_config, d92A_store, d92B_store
+from config_main import host_config, d92A_store, d92B_store, templates
+from flask_restful import Api
 
-app = Flask(__name__)
+
+app = Flask(__name__, template_folder = templates)
+
 limiter = Limiter(
     app,
     key_func=get_remote_address,
@@ -40,7 +43,6 @@ def result():
 
         request_data = request.data
         request_data = request_data.decode("utf-8")
-        print(request_data)
 
         if len(request_data) == 0:
             return "Please enter the valid pincode", 415
@@ -52,10 +54,15 @@ def result():
             return d92B_store[request_data], 200
 
         else:
-            print("rdef 3")
             return "Pin-code not found", 404
 
     return "The Configuration filename has been received and it's processing has been initiated"
+
+
+@app.route('/home')
+def home1():
+    return render_template('home.html')
+
 
 
 if __name__ == '__main__':
